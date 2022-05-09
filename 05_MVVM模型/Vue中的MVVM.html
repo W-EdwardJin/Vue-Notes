@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>理解MVVM</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <!-- 
+    MVVM 模型
+      1.M: 模型（Model）：data中的数据；
+      2.V: 视图（View）：模板代码
+      3.VM: 视图模型（ViewModel）：Vue实例
+    注：
+      1.data中的所有属性，最终都出现在了 vm 身上
+      2.vm 身上所有的属性 及 vue 原型上所有属性，在 Vue 模板中都可以直接使用
+   -->
+  <div id="root">
+    <h1>学校名称：{{ name }}</h1>
+    <h1>学校地址: {{ address }}</h1>
+    <h1>测试1: {{ $createElement }}</h1>
+    <h1>测试2: {{ $emit }}</h1>
+    <h1>测试3: {{ _c }}</h1>
+  </div>
+
+  <script>
+    Vue.config.productionTip = false;
+
+    // Vue 实例对象 就是一个 ViewModel(简称 vm)，起到连接 View(DOM HTML页面) 和 Model(data 里的数据) 的桥梁作用
+    const vm = new Vue({
+      el: '#root',
+      data() {
+        return {
+          name: 'Vue',
+          address: 'Shanghai',
+        }
+      }
+    });
+    console.log(vm);
+  </script>
+</body>
+</html>

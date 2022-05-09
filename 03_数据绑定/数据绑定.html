@@ -23,7 +23,7 @@
     双项数据绑定: <input type="text" v-model="name" />
 
     <!-- 如下代码是错误的，因为 v-model 只能应用在表单类元素（输入类元素，即有 value 值，如 <input>）上 -->
-    <h2 v-model:x="name">你好啊</h2>
+    <h2 v-model:x="name">{{ name.substring(2, 3) }}</h2>
 
   </div>
 
