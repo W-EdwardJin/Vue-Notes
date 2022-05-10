@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>姓名案例_computed实现</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    姓：<input type="text" v-model="lastName">
+    <br/>
+    名：<input type="text" v-model="firstName">
+    <br/>
+    姓名：<span>{{ fullName }}</span>
+    姓名：<span>{{ fullName }}</span>
+    姓名：<span>{{ fullName }}</span>
+    姓名：<span>{{ fullName }}</span>
+  </div>
+  <script>
+    Vue.config.productionTip = false;
+
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        lastName: '张',
+        firstName: '三',
+      },
+      // computed 可以有 setter 属性，但一般不用，只用作计算显示，只要用 getter 就行
+      computed: {
+        // 形式上是一个函数，但调用时不要加 ()，其底层原理是：
+        // 调用 fullName()，并将返回结果赋值给 vm.fullName，所以用的时候，就写 this.fullName
+        fullName() {
+          return `${this.lastName}-${this.firstName}`;
+        }
+      }
+      
+    })
+  </script>
+
+</body>
+</html>

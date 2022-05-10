@@ -10,7 +10,7 @@
 <body>
   <!-- 
     事件的基本使用：
-      1. 使用 v-on:xxx 或 @xxx 绑定事件，其中 xxx 是事件名；
+      1. 使用 v-on:xxx 或 @xxx 绑定事件(不仅限于 click,还可以自定义事件），其中 xxx 是事件名；
       2. 事件的回调需要配置在 methods 对象中，最终会在 vm 上；
       3. methods 中配置的函数，不要用 箭头函数，否则 this 指向的就不是 vm；
       4. methods 中配置函数，都是被 Vue 所管理的函数，this 的指向是 vm 或 组件实例对象

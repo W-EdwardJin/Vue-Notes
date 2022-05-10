@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>姓名案例_插值语法实现</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <!-- 计算属性是 Vue 设计的 -->
+  <div id="root">
+    姓：<input type="text" v-model="lastName">
+    <br/>
+    名：<input type="text" v-model="firstName">
+    <br/>
+    姓名：<span>{{ fullName() }}</span>
+    姓名：<span>{{ fullName() }}</span>
+    姓名：<span>{{ fullName() }}</span>
+    姓名：<span>{{ fullName() }}</span>
+    姓名：<span>{{ fullName() }}</span>
+  </div>
+
+  <!-- 
+    Vue 中，data 中任一数据发生变化，Vue 模板都会重新解析一遍，如果模板中用到该数据，就会更新
+   -->
+
+  <script>
+    Vue.config.productionTip = false;
+
+    new Vue({
+      el: '#root',
+      data: {
+        lastName: '张',
+        firstName: '三',
+      },
+      methods: {
+        fullName() {
+          console.log('@');
+          return `${this.lastName}-${this.firstName}`;
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>
