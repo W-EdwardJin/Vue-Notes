@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>天气案例</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <!-- 准备好一个容器 -->
+  <div id="root">
+    <h2>今天天气很 {{ info }}</h2>
+    <button @click="changeWeather">切换天气</button>
+    <hr/>
+    <h3>a的值是：{{ num.a.c }}</h3>
+    <button @click="num.a.c++;">点我让 c + 1</button>
+    <h3>b的值是：{{ num.b }}</h3>
+    <button @click="num.b++;">点我让 b + 1</button>
+    <!-- <button @click="num = {a: 0, b: 0};">num 彻底变了</button> -->
+  </div>
+</body>
+  <!-- 
+    深度监听：
+      （1）Vue 中的 watch 默认不监听对象内部值的改变（只监听到第一层）
+      （2）配置 deep: true 可以监测对象内部值改变（多层）
+    注：
+      （1）Vue 自身可以监视对象内部值的改变（vm.num.a = 0，Vue 可以监听到并更新模板)，但 Vue 提供的 watch 默认不可以（提高效率）
+      （2）使用 watch 根据数据的具体结构，再决定是否采取深度监听
+   -->
+  
+  <script>
+    Vue.config.productionTip = false;
+    
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        // 属性
+        isHot: true, // 是否炎热
+        num: {
+          a: {c: 1},
+          b: 2,
+        }
+      },
+      computed: {
+        // 计算属性
+        info() {
+          return this.isHot ? '炎热' : '寒冷';
+        }
+      },
+      methods: {
+        changeWeather() {
+          this.isHot = !this.isHot;
+        }
+      },
+      // 属性和计算属性都能被监听
+      watch: {
+        // watch 值为一个配置对象
+        isHot: {
+          // 函数；调用时机：当 isHot 发生改变时
+          handler(newValue, oldValue) {
+            console.log('isHot 被修改了', newValue, oldValue);
+          },
+          // 初始化时就执行 handler() , oldValue 为 undefined
+          immediate: true, 
+        },
+        info: {
+          handler() {
+            console.log('监听到info 改变了');
+          }
+        },
+        // 监视多级结构中某个属性的变化
+        'num.a': {
+          handler() {
+            console.log('a++');
+          }
+        },
+        num: {
+          handler() {
+            console.log('num 变了');
+          },
+          // 深度监听，监视多级结构中所有属性的变化
+          deep: true,
+        }
+      }
+    
+    });
+  </script>
+</html>
