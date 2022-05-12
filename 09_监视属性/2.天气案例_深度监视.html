@@ -55,16 +55,20 @@
       },
       // 属性和计算属性都能被监听
       watch: {
+        // isHot(newVal, oldVal) {
+        //   console.log('0512', newVal, oldVal);
+        // },
         // watch 值为一个配置对象
-        isHot: {
-          // 函数；调用时机：当 isHot 发生改变时
-          handler(newValue, oldValue) {
-            console.log('isHot 被修改了', newValue, oldValue);
-          },
-          // 初始化时就执行 handler() , oldValue 为 undefined
-          immediate: true, 
-        },
+        // isHot: {
+        //   // 函数；调用时机：当 isHot 发生改变时
+        //   handler(newValue, oldValue) {
+        //     console.log('isHot 被修改了', newValue, oldValue);
+        //   },
+        //   // 初始化时就执行 handler() , oldValue 为 undefined
+        //   immediate: true, 
+        // },
         info: {
+          // 当配置项仅有 handler，无 immediate 和 deep 时，可以简写
           handler() {
             console.log('监听到info 改变了');
           }
@@ -84,6 +88,20 @@
         }
       }
     
+    });
+
+    // 正常写法
+    // vm.$watch('isHot', {
+    //   immediate: true,
+    //   deep: true,
+    //   handler(newVal, oldVal) {
+    //     console.log(newVal);
+    //   }
+    // });
+
+    // 简写
+    vm.$watch('isHot', function(newVal, oldVal) {
+      console.log(newVal);
     });
   </script>
 </html>
