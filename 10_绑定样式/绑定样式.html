@@ -4,10 +4,18 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>绑定样式</title>
   <script src="../js/vue.js"></script>
 </head>
 <body>
-  
+  <!-- 绑定 class 样式  -->
+  <div id="root">
+    <!-- 字符串写法 适用于：样式的类名不确定，需动态指定 -->
+    <div class="basic" :class="string"></div>
+    <!-- 数组写法 适用于：要绑定的样式个数不确定、名字也不确定  -->
+    <div class="basic" :class="arr"></div>
+    <!-- 对象写法 适用于：要绑定的样式个数确定、名字也确定，但要动态决定用不用 -->
+    <div class="basic" :class="{atguigu: false, atguigu2: true}"></div>
+  </div>
 </body>
 </html>
