@@ -1,0 +1,23 @@
+<!-- 
+  Vue 监视数据的原理
+    1. vue 会监视 data 中所有层次的数据
+
+    2. 如何监测对象中的数据？
+      通过 setter 实现监视，且要在 new Vue 时就传入要监测的数据
+        （1）对象中后追加的属性，Vue 默认不做响应式处理
+        （2）如需给后添加的属性添加响应式（即加上 getter setter：数据劫持 —— 修改原数据、更新模板），请使用如下 api
+          Vue.set(target, propertyName/index, value) 或
+          vm.$set(target, propertyName/index, value)
+    
+    3. 如何监测数组中的数据？
+      通过包裹数组更新元素的方法实现，本质做了两件事：
+      （1）调用原生对应的方法对数组进行更新
+      （2）重新解析模板，进而更新页面
+    
+    4. 在 Vue 修改数组中的某个元素一定要用能够改变原数组的方法：
+      （1）push()、pop()、shift()、unshift()、splice()、sort()、reverse()
+      （2）Vue.set() 或 vm.$set()
+      （3）若要使用 filter()、slice()、concat() 不能改变原数组的方法，则需要将新数组替换原数组才能生效
+    
+      注意：Vue.set() 和 vm.$set() 不能给 vm 或 vm 的根数组对象 添加属性！
+ -->

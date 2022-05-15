@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <!-- 准备好一个容器 -->
+  <div id="root">
+    <!-- 更新马冬梅 -->
+    <button @click="updateMei">更新马冬梅信息</button>
+    <ul>
+      <li v-for="(p, index) in persons" :key="p.id">
+        {{ p.name }} - {{ p.age }} - {{ p.sex }}
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    Vue.config.productionTip = false;
+
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        keyWord: '',
+        persons: [
+           
+        ],
+      },
+      methods: {
+        updateMei() {
+          // this.persons[0].name = '马老师';
+          // this.persons[0].age = '100';
+          // this.persons[0].sex = '男';
+          this.persons[0] = {
+            name: '马老师',
+            age: 100,
+            sex: '男'
+          };
+          console.log(this.persons[0]);
+        }
+      }
+    })
+  </script>
+</body>
+</html>
