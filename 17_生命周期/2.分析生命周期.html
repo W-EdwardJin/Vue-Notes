@@ -120,9 +120,29 @@
       },
 
       /**
-       * 13. 
+       * 13. vm.$destroy() is called
        * 
        */
+
+      /**
+       * 14. beforeDestroy() 此时，vm中所有的：
+       * data、methods、指令等等，都处于可用状态，
+       * 马上要执行销毁过程，一般在此阶段：关闭定时器、取消订阅消息、解绑自定义时间等收尾操作
+       */
+      beforeDestroy() {
+        console.log('beforeDestroy');
+      },
+
+      /**
+       * 15. teardown watchers,child components and event listeners
+       */
+
+      /**
+       * destroyed() 
+       */
+      destroyed() {
+        console.log('destroyed');
+      }
 
       
     })
