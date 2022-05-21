@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <!-- 
+    1. 一个重要的内置关系： VueComponent.prototype.__proto__ === Vue.prototype(Vue 做的处理)
+    2. 为什么要有这个关系：让组件实例对象（vc）可以访问到 Vue 原型上的属性、方法
+    3. vm 和 vc 的区别：
+      vm 有 el、data 可以写成对象形式
+      vc 没有 el，听 vm 指挥服务于哪个容器，data 必须写成函数式，独立数据，避免引用
+   -->
+  <!-- 准备好一个容器 -->
+  <div id="root">
+
+  </div>
+
+  <script>
+    Vue.config.productionTip = false;
+
+    // 定义一个构造函数
+    function Demo() {
+      this.a = 1;
+      this.b = 2;
+    }
+
+    // 创建一个 Demo 的实例对象
+    const d = new Demo();
+
+    // 显式原型属性
+    console.log(Demo.prototype);
+
+    // 隐式原型属性
+    console.log(d.__proto__);
+
+    Demo.prototype.hello = 'hello Vue';
+    console.log('11', d.hello); // d 实例对象本身没有 hello 属性，接着就去 原型对象 prototype 上找该属性
+    console.log(Demo.prototype === d.__proto__); // 一个对象类型共用一个原型对象
+
+    // 定义 school 组件
+    const school = Vue.extend({
+      name: 'school',
+      template: `
+        <div>
+          <h2>学校名称：{{ name }}</h2>
+        </div>
+      `,
+      data() {
+        return {
+          name: 'Vue',
+        }
+      },
+    });
+
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        
+      }
+    })
+
+    console.log('内置关系', school.prototype.__proto__ === Vue.prototype);
+  </script>
+</body>
+</html>

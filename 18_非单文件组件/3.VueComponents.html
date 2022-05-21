@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <!-- 
+    关于 VueComponent：
+      1. school 组件本质是一个名为 VueComponent 的构造函数，且不是程序员定义的，是 Vue.extend 生成的
+      2. 我们只需要写 <school/> 或 <school></school>, Vue 解析时会帮我们创建 school 组件的实例对象，
+        即 Vue 帮我们执行的： new VueComponent(options)
+      3. 每次调用 Vue.extend, 返回的都是一个全新的 VueComponent !
+      4. this 指向
+        (1) 组件配置中 均指向 VueComponent 实例对象
+        (2) new Vue() 配置中，均指向 Vue 实例对象
+      5. VueComponent 实例对象，以后简称 vc （也可称为：组件实例对象）
+        Vue 实例对象，以后简称 vm（ 如 人类是一个构造函数，一个具体的人张三是一个实例对象 ）
+          
+   -->
+  <!-- 准备好一个容器 -->
+  <div id="root">
+    <my-school></my-school>
+  </div>
+
+  <script>
+    Vue.config.productionTip = false;
+
+    // 定义 school 组件
+    const school = Vue.extend({
+      template: `
+        <div>
+          <h2>学校名称：{{ name }}</h2>
+        </div>
+      `,
+      data() {
+        return {
+          name: 'Vue',
+        }
+      },
+    });
+
+    console.log(school);
+
+    const vm = new Vue({
+      el: '#root',
+      components: {
+        mySchool: school,
+      }
+    })
+  </script>
+</body>
+</html>
